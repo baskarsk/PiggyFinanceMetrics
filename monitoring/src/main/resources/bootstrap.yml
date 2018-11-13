@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: monitoring
+  cloud:
+    config:
+      uri: http://config-piggy.app.openshiftcognizant.com
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
