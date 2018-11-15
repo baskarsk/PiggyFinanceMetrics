@@ -1,0 +1,4 @@
+turbine:
+  appConfig: account-service,statistics-service
+  aggregator:
+    clusterConfig: ACCOUNT-SERVICE,STATISTICS-SERVICE
