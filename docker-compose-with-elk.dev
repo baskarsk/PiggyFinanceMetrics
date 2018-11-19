@@ -1,0 +1,153 @@
+version: '2.1'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
+    ports:
+      - 9200:9200
+	environment:
+      - "xpack.security.enabled=false"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://elasticsearch:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 10  
+	  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.2.2
+    ports:
+      - 5601:5601
+    environment:
+      - "xpack.security.enabled=false"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:5.2.2
+    ports:
+      - "25826:25826"
+    volumes:
+      - $PWD/elk-config:/elk-config
+    command: logstash -f /elk-config/logstash.config
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://logstash:8282"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+	  
+  rabbitmq:
+    ports:
+      - 5672:5672
+
+  config:
+    build: config
+    ports:
+      - 8888:8888
+
+  registry:
+    build: registry
+
+  gateway:
+    build: gateway
+
+  auth-service:
+    build: auth-service
+    ports:
+      - 5000:5000
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy
+
+  auth-mongodb:
+    build: mongodb
+    ports:
+      - 25000:27017
+
+  account-service:
+    build: account-service
+    ports:
+      - 6000:6000
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy
+
+  account-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
+
+  statistics-service:
+    build: statistics-service
+    ports:
+      - 7000:7000
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy
+
+  statistics-mongodb:
+    build: mongodb
+    ports:
+      - 27000:27017
+
+  notification-service:
+    build: notification-service
+    ports:
+      - 8000:8000
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy  
+	
+
+  notification-mongodb:
+    build: mongodb
+    ports:
+      - 28000:27017
+
+  monitoring:
+    build: monitoring
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy
+
+  turbine-stream-service:
+    build: turbine-stream-service
+	logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://logstash:25826"
+
+    depends_on:
+      logstash:
+        condition: service_healthy
+    
+  
+	
