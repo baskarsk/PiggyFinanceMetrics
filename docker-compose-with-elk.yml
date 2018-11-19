@@ -4,7 +4,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
     ports:
       - 9200:9200
-	environment:
+    environment:
       - "xpack.security.enabled=false"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     healthcheck:
@@ -26,7 +26,7 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:5.2.2
     ports:
-      - "25826:25826"
+      - 25826:25826
     volumes:
       - $PWD/elk-config:/elk-config
     command: logstash -f /elk-config/logstash.config
@@ -58,10 +58,10 @@ services:
     build: auth-service
     ports:
       - 5000:5000
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
@@ -76,10 +76,10 @@ services:
     build: account-service
     ports:
       - 6000:6000
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
@@ -94,10 +94,10 @@ services:
     build: statistics-service
     ports:
       - 7000:7000
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
@@ -112,10 +112,10 @@ services:
     build: notification-service
     ports:
       - 8000:8000
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
@@ -129,10 +129,10 @@ services:
 
   monitoring:
     build: monitoring
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
@@ -140,10 +140,10 @@ services:
 
   turbine-stream-service:
     build: turbine-stream-service
-	logging:
+    logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:25826"
+        syslog-address: "http://logstash:25826"
 
     depends_on:
       logstash:
