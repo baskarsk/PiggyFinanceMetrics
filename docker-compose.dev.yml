@@ -22,7 +22,7 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"
 
   auth-mongodb:
     build: mongodb
@@ -36,7 +36,7 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"  
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"  
 
   account-mongodb:
     build: mongodb
@@ -50,7 +50,7 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"  
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"  
 
   statistics-mongodb:
     build: mongodb
@@ -64,7 +64,7 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"  
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"  
 
   notification-mongodb:
     build: mongodb
@@ -76,11 +76,11 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"
 
   turbine-stream-service:
     build: turbine-stream-service
     logging:
       driver: syslog
       options:
-        syslog-address: "tcp://logstash:5044"
+        syslog-address: "http://logstash-piggyfinance.app.openshiftcognizant.com:5044"
