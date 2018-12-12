@@ -7,3 +7,11 @@ spring:
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
+
+logging:
+  level:
+    org.springframework.security: INFO
+  file: /var/lib/docker/containers/account-service/account-service.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
