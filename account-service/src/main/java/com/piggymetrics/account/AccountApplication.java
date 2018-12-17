@@ -23,8 +23,9 @@ public class AccountApplication {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AccountApplication.class);
 	
 	public static void main(String[] args) {
-		LOGGER.info("==== AccountApplication started ======");
+		LOGGER.debug("DEBUG"+"AccountApplication started");
 		SpringApplication.run(AccountApplication.class, args);
+		
 	}
 
 }

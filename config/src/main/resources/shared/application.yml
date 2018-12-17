@@ -1,6 +1,8 @@
 logging:
   level:
     org.springframework.security: INFO
+    org.springframework.web: INFO
+    com.piggymetrics: DEBUG
   file: /var/lib/docker/containers/*/*.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

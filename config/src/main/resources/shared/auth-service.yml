@@ -11,3 +11,13 @@ server:
   servlet:
     context-path: /uaa
   port: 5000
+  
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+    com.piggymetrics.auth: DEBUG
+  file: /var/lib/docker/containers/auth-service/auth-service.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

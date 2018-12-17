@@ -23,3 +23,13 @@ server:
 
 rates:
   url: https://api.exchangeratesapi.io
+  
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+    com.piggymetrics.statistics: DEBUG
+  file: /var/lib/docker/containers/statistics-service/statistics-service.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

@@ -45,6 +45,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account create(User user) {
 
+		log.debug("-- In Create method --");
 		Account existing = repository.findByName(user.getUsername());
 		Assert.isNull(existing, "account already exists: " + user.getUsername());
 
@@ -64,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
 
 		repository.save(account);
 
-		log.info("new account has been created: " + account.getName());
+		log.debug("new account has been created: " + account.getName());
 
 		return account;
 	}
