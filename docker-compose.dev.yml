@@ -19,10 +19,11 @@ services:
     build: auth-service
     ports:
       - 5000:5000
-    #logging:
-    #  driver: syslog
-    #  options:
-    #   syslog-address: "tcp://172.30.146.159:5044"
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "1"
 
   auth-mongodb:
     build: mongodb
@@ -33,10 +34,11 @@ services:
     build: account-service
     ports:
       - 6000:6000
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "tcp://172.30.146.159:5044"  
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "3"
 
   account-mongodb:
     build: mongodb
@@ -47,10 +49,11 @@ services:
     build: statistics-service
     ports:
       - 7000:7000
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "tcp://172.30.146.159:5044"  
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "3"
 
   statistics-mongodb:
     build: mongodb
@@ -61,10 +64,11 @@ services:
     build: notification-service
     ports:
       - 8000:8000
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "tcp://172.30.146.159:5044"  
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "1"
 
   notification-mongodb:
     build: mongodb
@@ -73,14 +77,16 @@ services:
 
   monitoring:
     build: monitoring
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "tcp://172.30.146.159:5044"
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "1"
 
   turbine-stream-service:
     build: turbine-stream-service
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    syslog-address: "tcp://172.30.146.159:5044"
+    logging:
+      driver: "json-file"
+      options:
+       "max-size": "10m",
+       "max-file": "1"
