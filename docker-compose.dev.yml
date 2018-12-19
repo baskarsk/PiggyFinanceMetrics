@@ -22,7 +22,7 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "1"
 
   auth-mongodb:
@@ -37,7 +37,7 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "3"
 
   account-mongodb:
@@ -52,7 +52,7 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "3"
 
   statistics-mongodb:
@@ -67,7 +67,7 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "1"
 
   notification-mongodb:
@@ -80,7 +80,7 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "1"
 
   turbine-stream-service:
@@ -88,5 +88,5 @@ services:
     logging:
       driver: "json-file"
       options:
-       "max-size": "10m"
+       "max-size": "5m"
        "max-file": "1"
