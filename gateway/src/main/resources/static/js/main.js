@@ -887,12 +887,14 @@ function jsonDataSave() {
             }),
             success: function () {
                 $("#leftborder, #rightborder, #centerborder").addClass("saveaction");
+				 alert("*****SUCCESSFULLY SAVED ACCOUNTS DATA*****");
                 setTimeout(function() {
                     $("#leftborder, #rightborder, #centerborder").removeClass("saveaction");
                 }, 400);
+				 alert("*****SUCCESSFULLY SAVED ACCOUNTS DATA*****");
             },
             error: function () {
-                alert("An error during data saving. Please, try again later");
+                alert("An error during data saving,might be ACCOUNT SERVICE IS DOWN. Please, try again later");
             }
         });
     }
